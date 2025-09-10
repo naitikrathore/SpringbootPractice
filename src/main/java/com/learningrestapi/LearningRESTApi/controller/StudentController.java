@@ -3,6 +3,7 @@ package com.learningrestapi.LearningRESTApi.controller;
 import com.learningrestapi.LearningRESTApi.dto.AddStudentRequestDto;
 import com.learningrestapi.LearningRESTApi.dto.StudentDto;
 import com.learningrestapi.LearningRESTApi.service.StudentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,17 +45,17 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentDto> createStudentEntry(@RequestBody AddStudentRequestDto addStudentRequestDto){
+    public ResponseEntity<StudentDto> createStudentEntry(@RequestBody @Valid AddStudentRequestDto addStudentRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createEntry(addStudentRequestDto));
     }
 
     @PutMapping("/id/{id}")
-    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id, @RequestBody AddStudentRequestDto addStudentRequestDto){
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id, @RequestBody @Valid AddStudentRequestDto addStudentRequestDto){
         return ResponseEntity.ok(studentService.updateStudent(id,addStudentRequestDto));
     }
 
     @PatchMapping("/id/{id}")
-    public ResponseEntity<StudentDto> updatePartialStudent(@PathVariable Long id, @RequestBody Map<String, Object> updates){
+    public ResponseEntity<StudentDto> updatePartialStudent(@PathVariable Long id, @RequestBody @Valid Map<String, Object> updates){
         return ResponseEntity.ok(studentService.updatePartialStudent(id,updates));
     }
 
