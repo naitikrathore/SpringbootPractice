@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @RestController is a convenience annotation that combines @Controller and @ResponseBody.
@@ -42,6 +43,21 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
+    @PostMapping
+    public ResponseEntity<StudentDto> createStudentEntry(@RequestBody AddStudentRequestDto addStudentRequestDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createEntry(addStudentRequestDto));
+    }
+
+    @PutMapping("/id/{id}")
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id, @RequestBody AddStudentRequestDto addStudentRequestDto){
+        return ResponseEntity.ok(studentService.updateStudent(id,addStudentRequestDto));
+    }
+
+    @PatchMapping("/id/{id}")
+    public ResponseEntity<StudentDto> updatePartialStudent(@PathVariable Long id, @RequestBody Map<String, Object> updates){
+        return ResponseEntity.ok(studentService.updatePartialStudent(id,updates));
+    }
+
     @DeleteMapping("/id/{id}")
     public ResponseEntity<Boolean> deleteEntryById(@PathVariable Long id){
         System.out.println("delete function called with id  " + id);
@@ -51,10 +67,5 @@ public class StudentController {
             return ResponseEntity.ok(true);
         else
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
-    }
-
-    @PostMapping
-    public ResponseEntity<StudentDto> createStudentEntry(@RequestBody AddStudentRequestDto addStudentRequestDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createEntry(addStudentRequestDto));
     }
 }
