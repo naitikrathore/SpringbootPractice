@@ -1,6 +1,6 @@
-package com.learningrestapi.LearningRESTApi.service.repository;
+package com.learningrestapi.LearningRESTApi.repository;
 
-import com.learningrestapi.LearningRESTApi.service.entity.Student;
+import com.learningrestapi.LearningRESTApi.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

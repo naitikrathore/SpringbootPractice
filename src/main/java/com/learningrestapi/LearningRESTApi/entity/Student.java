@@ -1,4 +1,4 @@
-package com.learningrestapi.LearningRESTApi.service.entity;
+package com.learningrestapi.LearningRESTApi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
